@@ -14,20 +14,22 @@ public class WoodCutting {
             arr[i]=sc.nextInt();
             right=Math.max(right,arr[i]);
         }
-        System.out.println(heightOfMachine(arr,0,right,treeSize));
+        System.out.println(heightOfMachine(arr,0,right,treeSize,0));
     }
 
-    static int heightOfMachine(int[] arr,int left,int right,int treeSize)
+    static int heightOfMachine(int[] arr,int left,int right,int treeSize, int ans)
     {
         if(left>right)
-            return left;
+            return ans;
         int mid=left+(right-left)/2;
-        if(woodGained(arr,mid)==treeSize)
+        int woodGain= woodGained(arr,mid);
+        if(woodGain==treeSize)
             return mid;
-        else if (woodGained(arr,mid)>treeSize) {
-            return heightOfMachine(arr,mid+1,right,treeSize);
+        else if (woodGain>treeSize) {
+            ans=mid;
+            return heightOfMachine(arr,mid+1,right,treeSize,ans);
         }
-        else return heightOfMachine(arr,left,mid+1,treeSize);
+        else return heightOfMachine(arr,left,mid-1,treeSize,ans);
     }
 
     static int woodGained(int[] arr,int mid)
