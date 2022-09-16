@@ -1,4 +1,4 @@
-package GitCode;
+package GitCode.DSA.Common;
 
 public class GetTimeToEvalute {
     long startTime=0;
