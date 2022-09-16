@@ -14,7 +14,7 @@ public class PowerOfN {
         if(pow==0)
             return 1;
         if(pow%2==0)
-            return recursion(num,pow/2) * recursion(num,pow/2);
-        else return num * recursion(num,pow/2) *recursion(num,pow/2);
+            return recursion(num*num,pow/2);
+        else return num * recursion(num*num,pow/2);
     }
 }
