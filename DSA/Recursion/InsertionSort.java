@@ -4,48 +4,27 @@ import java.util.Arrays;
 
 public class InsertionSort {
     public static void main(String[] args) {
-        int[] arr=new int[]{3,8,7,1,6};
-        sort(arr,0,arr.length-1);
+        int[] arr ={3,5,2,7,1,5};
+        sort(arr,1);
         System.out.println(Arrays.toString(arr));
     }
 
-    static void sort(int[] arr,int left,int right)
+    static void sort(int[] arr,int index)
     {
-        if(left>=right)
+        if(index>=arr.length)
             return;
-        int pivot=getPivot(arr,left,right);
-        sort(arr,left,pivot-1);
-        sort(arr,pivot+1,right);
+        int temp=index;
+        while (temp>0&&arr[temp-1]>arr[temp]) {
+            swap(arr, temp);
+            temp--;
+        }
+        sort(arr,index+1);
     }
 
-    static int getPivot(int[] arr, int left,int right)
+    static void swap(int[] arr, int i)
     {
-        int pivot=left;
-        int count=0;
-        for (int i=pivot;i<=right;i++) {
-            if(arr[i]<arr[pivot])
-                count++;
-        }
-        int pivotIndex=pivot+count;
-        int temp1=arr[pivotIndex];
-        arr[pivotIndex]=arr[pivot];
-        arr[pivot]=temp1;
-        while (left<pivotIndex && right>pivotIndex)
-        {
-            while (arr[left]<arr[pivotIndex])
-                left++;
-            while (arr[right]>arr[pivotIndex])
-                right--;
-            if(arr[left]>arr[pivotIndex] && arr[right]<arr[pivotIndex])
-            {
-                int temp=arr[right];
-                arr[right]=arr[left];
-                arr[left]=temp;
-                left++;
-                right++;
-            }
-        }
-        return pivotIndex;
+        int temp = arr[i];
+        arr[i]=arr[i-1];
+        arr[i-1]=temp;
     }
-
 }
